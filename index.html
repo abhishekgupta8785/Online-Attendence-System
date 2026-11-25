@@ -1,0 +1,436 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendify Pro | Smart Attendance System</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+
+        <div class="brand">
+            <div class="brand-logo">A</div>
+            <div>
+                <h2>Attendify<span>Pro</span></h2>
+                <small>Attendance System</small>
+            </div>
+        </div>
+
+        <div class="nav-label">WORKSPACE</div>
+
+        <nav>
+            <button class="nav-item active" data-page="dashboard">
+                <span>▦</span> Dashboard
+            </button>
+            <button class="nav-item" data-page="students">
+                <span>♙</span> Students
+            </button>
+            <button class="nav-item" data-page="attendance">
+                <span>✓</span> Attendance
+            </button>
+            <button class="nav-item" data-page="reports">
+                <span>▤</span> Reports
+            </button>
+        </nav>
+
+        <div class="nav-label second-label">PREFERENCES</div>
+
+        <nav>
+            <button class="nav-item" data-page="settings">
+                <span>⚙</span> Settings
+            </button>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="admin-avatar">AD</div>
+            <div class="admin-details">
+                <strong>Administrator</strong>
+                <small>System Admin</small>
+            </div>
+            <span class="online-dot"></span>
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN AREA -->
+    <main class="main-content">
+
+        <!-- TOPBAR -->
+        <header class="topbar">
+
+            <div class="top-left">
+                <button class="menu-toggle" id="menuToggle">☰</button>
+                <div>
+                    <h1 id="pageTitle">Dashboard</h1>
+                    <p id="pageSubtitle">Welcome back! Here's your overview.</p>
+                </div>
+            </div>
+
+            <div class="top-actions">
+                <div class="current-date" id="currentDate"></div>
+                <button class="theme-btn" id="themeToggle" title="Toggle theme">◐</button>
+                <div class="top-profile">AD</div>
+            </div>
+
+        </header>
+
+
+        <!-- DASHBOARD -->
+        <section class="page active" id="dashboard">
+
+            <div class="welcome-card">
+                <div>
+                    <span class="welcome-label">SMART ATTENDANCE MANAGEMENT</span>
+                    <h2>Manage Attendance Smarter.</h2>
+                    <p>Track students, monitor attendance and manage records in one place.</p>
+                    <button class="white-btn" data-go="attendance">Take Attendance →</button>
+                </div>
+                <div class="welcome-illustration">🎓</div>
+            </div>
+
+
+            <div class="section-heading">
+                <div>
+                    <h2>Overview</h2>
+                    <p>Today's attendance summary</p>
+                </div>
+                <span class="live-badge">● Live Dashboard</span>
+            </div>
+
+
+            <div class="stats-grid">
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <span>Total Students</span>
+                        <div class="stat-icon violet">♙</div>
+                    </div>
+                    <h2 id="totalStudents">0</h2>
+                    <small>Registered students</small>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <span>Present Today</span>
+                        <div class="stat-icon green">✓</div>
+                    </div>
+                    <h2 id="presentCount">0</h2>
+                    <small>Marked present</small>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <span>Absent Today</span>
+                        <div class="stat-icon red">✕</div>
+                    </div>
+                    <h2 id="absentCount">0</h2>
+                    <small>Marked absent</small>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <span>Attendance Rate</span>
+                        <div class="stat-icon blue">%</div>
+                    </div>
+                    <h2 id="attendanceRate">0%</h2>
+                    <small>Today's attendance</small>
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-grid">
+
+                <div class="panel">
+                    <div class="panel-heading">
+                        <div>
+                            <h3>Attendance Analytics</h3>
+                            <p>Last 7 days attendance overview</p>
+                        </div>
+                    </div>
+                    <div class="chart" id="weeklyChart"></div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-heading">
+                        <div>
+                            <h3>Attendance Status</h3>
+                            <p>Today's student status</p>
+                        </div>
+                    </div>
+                    <div class="donut-wrap">
+                        <div class="donut" id="donutChart">
+                            <div>
+                                <strong id="donutPercent">0%</strong>
+                                <small>Present</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="legend">
+                        <span><i class="dot green-bg"></i> Present</span>
+                        <span><i class="dot red-bg"></i> Absent</span>
+                        <span><i class="dot gray-bg"></i> Not marked</span>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="panel recent-panel">
+                <div class="panel-heading">
+                    <div>
+                        <h3>Recent Students</h3>
+                        <p>Recently added student records</p>
+                    </div>
+                    <button class="outline-btn" data-go="students">View All →</button>
+                </div>
+                <div id="recentStudents"></div>
+            </div>
+
+        </section>
+
+
+        <!-- STUDENTS -->
+        <section class="page" id="students">
+
+            <div class="section-heading">
+                <div>
+                    <h2>Student Management</h2>
+                    <p>Manage all registered students</p>
+                </div>
+                <span class="count-badge" id="studentCount">0 Students</span>
+            </div>
+
+            <div class="panel">
+
+                <h3>Add New Student</h3>
+
+                <form id="studentForm" class="student-form">
+
+                    <div class="field">
+                        <label>Student Name</label>
+                        <input id="studentName" placeholder="Enter full name" required>
+                    </div>
+
+                    <div class="field">
+                        <label>Roll Number</label>
+                        <input id="rollNumber" placeholder="Enter roll number" required>
+                    </div>
+
+                    <div class="field">
+                        <label>Class / Section</label>
+                        <input id="studentClass" placeholder="e.g. B.Tech CSE">
+                    </div>
+
+                    <button class="primary-btn" type="submit">+ Add Student</button>
+
+                </form>
+
+            </div>
+
+
+            <div class="panel">
+                <div class="panel-heading">
+                    <div>
+                        <h3>All Students</h3>
+                        <p>Student database records</p>
+                    </div>
+                    <input class="search-input" id="studentSearch" placeholder="Search students...">
+                </div>
+
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>STUDENT</th>
+                                <th>ROLL NUMBER</th>
+                                <th>CLASS</th>
+                                <th>ACTION</th>
+                            </tr>
+                        </thead>
+                        <tbody id="studentTable"></tbody>
+                    </table>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- ATTENDANCE -->
+        <section class="page" id="attendance">
+
+            <div class="section-heading">
+                <div>
+                    <h2>Attendance Management</h2>
+                    <p>Record daily student attendance</p>
+                </div>
+                <span class="live-badge">● Attendance Panel</span>
+            </div>
+
+            <div class="panel">
+
+                <div class="attendance-toolbar">
+                    <div class="field">
+                        <label>Select Date</label>
+                        <input type="date" id="attendanceDate">
+                    </div>
+                    <div class="field">
+                        <label>Search Student</label>
+                        <input id="attendanceSearch" placeholder="Search name or roll...">
+                    </div>
+                </div>
+
+                <div class="attendance-summary" id="attendanceSummary">
+                    Attendance has not been saved for this date.
+                </div>
+
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>STUDENT</th>
+                                <th>ROLL NUMBER</th>
+                                <th>ATTENDANCE STATUS</th>
+                            </tr>
+                        </thead>
+                        <tbody id="attendanceTable"></tbody>
+                    </table>
+                </div>
+
+                <div class="save-area">
+                    <button class="primary-btn" id="saveAttendance">
+                        ✓ Save Attendance
+                    </button>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- REPORTS -->
+        <section class="page" id="reports">
+
+            <div class="section-heading">
+                <div>
+                    <h2>Attendance Reports</h2>
+                    <p>Analyze student attendance performance</p>
+                </div>
+                <button class="primary-btn" id="exportReport">↓ Export CSV</button>
+            </div>
+
+            <div class="stats-grid report-stats">
+                <div class="stat-card">
+                    <span>Total Students</span>
+                    <h2 id="reportTotal">0</h2>
+                </div>
+                <div class="stat-card">
+                    <span>Total Present Records</span>
+                    <h2 id="reportPresent">0</h2>
+                </div>
+                <div class="stat-card">
+                    <span>Total Absent Records</span>
+                    <h2 id="reportAbsent">0</h2>
+                </div>
+                <div class="stat-card">
+                    <span>Overall Attendance</span>
+                    <h2 id="reportRate">0%</h2>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-heading">
+                    <div>
+                        <h3>Student Performance</h3>
+                        <p>Attendance percentage by student</p>
+                    </div>
+                </div>
+
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>STUDENT</th>
+                                <th>ROLL NUMBER</th>
+                                <th>PRESENT</th>
+                                <th>ABSENT</th>
+                                <th>PERCENTAGE</th>
+                            </tr>
+                        </thead>
+                        <tbody id="reportTable"></tbody>
+                    </table>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- SETTINGS -->
+        <section class="page" id="settings">
+
+            <div class="section-heading">
+                <div>
+                    <h2>Settings</h2>
+                    <p>Manage your project preferences</p>
+                </div>
+            </div>
+
+            <div class="panel settings-panel">
+                <h3>Application Information</h3>
+                <div class="setting-row">
+                    <span>Application Name</span>
+                    <strong>Attendify Pro</strong>
+                </div>
+                <div class="setting-row">
+                    <span>Project Type</span>
+                    <strong>Mini Project</strong>
+                </div>
+                <div class="setting-row">
+                    <span>Frontend</span>
+                    <strong>HTML, CSS, JavaScript</strong>
+                </div>
+                <div class="setting-row">
+                    <span>Storage</span>
+                    <strong>Browser LocalStorage</strong>
+                </div>
+                <div class="setting-row">
+                    <span>Version</span>
+                    <strong>3.0</strong>
+                </div>
+            </div>
+
+            <div class="panel">
+                <h3>Data Management</h3>
+                <p class="muted">Download a backup or reset the locally stored project data.</p>
+                <div class="settings-actions">
+                    <button class="outline-btn" id="backupData">↓ Backup Data</button>
+                    <button class="danger-btn" id="resetData">Reset All Data</button>
+                </div>
+            </div>
+
+        </section>
+
+
+        <footer>
+            <strong>Attendify Pro</strong>
+            <p>Online Attendance Management System | Mini Project</p>
+            <small>Designed with HTML, CSS & JavaScript</small>
+        </footer>
+
+    </main>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
